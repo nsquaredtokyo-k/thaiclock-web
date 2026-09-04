@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'thaiwords.dart';
 import 'package:url_launcher/url_launcher.dart'; // 外部リンクへ繋げる
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web/web.dart' as web; // 最新Web標準ライブラリ
 
 void main() {
   runApp(const MyApp());
@@ -581,16 +582,13 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
 
                             // ★ここから追加ボタン
                             ElevatedButton.icon(
-                              onPressed: () async {
-                                final Uri url = Uri.parse(
-                                    'https://nsquaredtokyo-k.github.io/thaiclock-web/');
-                                if (await canLaunchUrl(url)) {
-                                  await launchUrl(
-                                    url,
-                                    webOnlyWindowName:
-                                        'ThaiClockMini', // 新しいウィンドウで開く設定
-                                  );
-                                }
+                              onPressed: () {
+                                // 幅380px、高さ700pxの小窓をパッと開く
+                                web.window.open(
+                                  'https://nsquaredtokyo-k.github.io/thaiclock-web/',
+                                  'ThaiClockMini',
+                                  'width=380,height=700,resizable=yes,scrollbars=no',
+                                );
                               },
                               icon: const Icon(Icons.open_in_new, size: 18),
                               label: const Text('📱 デスクトップ用ミニ時計を開く'),
@@ -682,16 +680,8 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                       ),
                       const Text(' | ', style: TextStyle(color: Colors.grey)),
                       TextButton(
-                        onPressed: () async {
-                          final url =
-                              Uri.parse('https://forms.gle/gg1ynzueiQQTfhz8A');
-                          if (await canLaunchUrl(url)) {
-                            await launchUrl(
-                              url,
-                              mode:
-                                  LaunchMode.externalApplication, // ブラウザアプリ等で開く
-                            );
-                          }
+                        onPressed: () {
+                          _launchURL('https://forms.gle/gg1ynzueiQQTfhz8A');
                         },
                         child: const Text('フィードバック',
                             style: TextStyle(color: Colors.grey)),

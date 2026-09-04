@@ -310,7 +310,7 @@ class _ThaiVocabularyScreenState extends State<ThaiVocabularyScreen> {
                             // 完全に縦並びにするか選べるよ。
                             // ここは2つを横に並べる方法で書いておくね。もしこれでもはみ出るなら、Columnの中に2つのIconを縦に並べてね。
                             Row(
-                              children: const [
+                              children: [
                                 Icon(Icons.nature,
                                     color: Colors.green, size: 18),
                                 SizedBox(width: 4), // アイコン同士の間に隙間
