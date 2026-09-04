@@ -455,249 +455,267 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
 //=============================================
 //==========================表示のところを画面サイズに合わせる============
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E), // Webサイト全体のダーク背景色
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
-          child: Center(
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 1000), // PC画面での最大幅
-              child: Column(
-                children: [
-                  // ==========================================================
-                  // 1. 🔝 ヘッダー（WEBサイトのタイトル）
-                  // ==========================================================
-                  const Text(
-                    '🇹🇭 Thai Clock (タイ語時計) - Web版',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          // ==========================================================
+          // 📱 小窓（幅600px未満のミニウィンドウ）で開いた時
+          // ==========================================================
+          if (constraints.maxWidth < 600) {
+            return Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color.fromARGB(255, 43, 25, 4), // ご希望の暗い時計背景色
+              padding: const EdgeInsets.all(16.0),
+              child: SafeArea(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: _buildClockContent(context), // タイトルや枠なしで時計の中身だけ表示
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'タイ語独特の時間の読み方をリアルタイムで楽しめる時計アプリ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 32),
+                ),
+              ),
+            );
+          }
 
-                  // ==========================================================
-                  // 2. 📱 メインエリア（PCでは左右分割 / スマホでは上下）
-                  // ==========================================================
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      final isWide = constraints.maxWidth > 600;
+          // ==========================================================
+          // 💻 通常のWebサイト（幅600px以上のPC画面など）で開いた時
+          // ==========================================================
+          return SafeArea(
+            child: SingleChildScrollView(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
+              child: Center(
+                child: Container(
+                  constraints:
+                      const BoxConstraints(maxWidth: 1000), // PC画面での最大幅
+                  child: Column(
+                    children: [
+                      // ==========================================================
+                      // 1. 🔝 ヘッダー（WEBサイトのタイトル）
+                      // ==========================================================
+                      const Text(
+                        '🇹🇭 Thai Clock (タイ語時計) - Web版',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'タイ語独特の時間の読み方をリアルタイムで楽しめる時計アプリ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                      ),
+                      const SizedBox(height: 32),
 
-                      // 👈 左側：タイ時計本体（スマホ枠）
-                      Widget clockWidget = Container(
-                        width: isWide ? 380 : double.infinity,
-                        height: 680,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF1E293B), // スマホの外枠（ダークグレー）
-                          borderRadius: BorderRadius.circular(48), // スマホらしい丸み
-                          border: Border.all(
-                            color: const Color(0xFF334155), // スマホの縁フレーム
-                            width: 8,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.5),
-                              blurRadius: 25,
-                              offset: const Offset(0, 12),
+                      // ==========================================================
+                      // 2. 📱 メインエリア（PCでは左右分割）
+                      // ==========================================================
+                      Builder(
+                        builder: (context) {
+                          // 👈 左側：タイ時計本体（スマホ枠）
+                          Widget clockWidget = Container(
+                            width: 380,
+                            height: 680,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1E293B), // スマホの外枠（ダークグレー）
+                              borderRadius:
+                                  BorderRadius.circular(48), // スマホらしい丸み
+                              border: Border.all(
+                                color: const Color(0xFF334155), // スマホの縁フレーム
+                                width: 8,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.5),
+                                  blurRadius: 25,
+                                  offset: const Offset(0, 12),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(40), // 液晶画面の角丸
-                          child: Column(
-                            children: [
-                              // スマホ上部のスピーカー（ノッチ風）
-                              Container(
-                                width: 80,
-                                height: 16,
-                                margin:
-                                    const EdgeInsets.only(top: 8, bottom: 4),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withValues(alpha: 0.6),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.circular(40), // 液晶画面の角丸
+                              child: Column(
+                                children: [
+                                  // スマホ上部のスピーカー（ノッチ風）
+                                  Container(
+                                    width: 80,
+                                    height: 16,
+                                    margin: const EdgeInsets.only(
+                                        top: 8, bottom: 4),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Colors.black.withValues(alpha: 0.6),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  // 液晶画面エリア（従来の時計表示）
+                                  Expanded(
+                                    child: Container(
+                                      color: const Color.fromARGB(
+                                          255, 43, 25, 4), // 従来の時計背景色
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: _buildClockContent(context),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              // 液晶画面エリア（従来の時計表示）
-                              Expanded(
-                                child: Container(
-                                  color: const Color.fromARGB(
-                                      255, 43, 25, 4), // 従来の時計背景色
-                                  padding: const EdgeInsets.all(20.0),
-                                  child:
-                                      _buildClockContent(context), // 時計の中身を呼び出し
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                            ),
+                          );
 
-                      // 👉 右側：簡単な説明テキスト
-                      Widget descriptionWidget = Container(
+                          // 👉 右側：簡単な説明テキスト
+                          Widget descriptionWidget = Container(
+                            padding: const EdgeInsets.all(24.0),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF2C2C2E),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  '💡 タイ語の時刻表現について',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'タイ語の時間の言い方は、朝・昼・夕方・夜で使う単語がガラリと変わるユニークな仕組みになっています。\n\n'
+                                  '・ตี（ティー）：朝方（1時〜5時）\n'
+                                  '・โมงเช้า（モーンチャオ）：午前中（6時〜11時）\n'
+                                  '・เที่ยง（ティアン）：正午（12時）\n'
+                                  '・บ่าย（バーイ）：午後（13時〜15時）\n'
+                                  '・โมงเย็น（モーンイエン）：夕方（16時〜18時）\n'
+                                  '・ทุ่ม（トゥム）：夜（19時〜23時）\n'
+                                  '・เที่ยงคืน（ティアンクーン）：深夜0時\n\n'
+                                  '※日替わりでタイのラッキーカラー（曜日カラー）が日付に反映されます！',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color:
+                                        const Color.fromARGB(255, 250, 248, 248)
+                                            .withValues(alpha: 0.87),
+                                    height: 1.6,
+                                  ),
+                                ),
+                                const SizedBox(height: 24),
+
+                                // ★ここから追加ボタン
+                                ElevatedButton.icon(
+                                  onPressed: () {
+                                    // 幅380px、高さ700pxの小窓をパッと開く
+                                    web.window.open(
+                                      'https://nsquaredtokyo-k.github.io/thaiclock-web/',
+                                      'ThaiClockMini',
+                                      'width=380,height=700,resizable=yes,scrollbars=no',
+                                    );
+                                  },
+                                  icon: const Icon(Icons.open_in_new, size: 18),
+                                  label: const Text(' デスクトップ用ミニ時計を開く'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF334155),
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 14),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+
+                          // PC画面なので横並びにする
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              clockWidget,
+                              const SizedBox(width: 32),
+                              Expanded(child: descriptionWidget),
+                            ],
+                          );
+                        },
+                      ),
+
+                      const SizedBox(height: 48),
+
+                      // ==========================================================
+                      // 3. 📲 下部：スマホアプリ版のご案内・紹介エリア
+                      // ==========================================================
+                      Container(
+                        width: double.infinity,
                         padding: const EdgeInsets.all(24.0),
                         decoration: BoxDecoration(
                           color: const Color(0xFF2C2C2E),
                           borderRadius: BorderRadius.circular(24),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: const Column(
                           children: [
                             Text(
-                              '💡 タイ語の時刻表現について',
+                              'スマホアプリ版（iOS / Android）ならもっと身近に！',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(height: 16),
+                            SizedBox(height: 12),
                             Text(
-                              'タイ語の時間の言い方は、朝・昼・夕方・夜で使う単語がガラリと変わるユニークな仕組みになっています。\n\n'
-                              '・ตี（ティー）：朝方（1時〜5時）\n'
-                              '・โมงเช้า（モーンチャオ）：午前中（6時〜11時）\n'
-                              '・เที่ยง（ティアン）：正午（12時）\n'
-                              '・บ่าย（バーイ）：午後（13時〜15時）\n'
-                              '・โมงเย็น（モーンイエン）：夕方（16時〜18時）\n'
-                              '・ทุ่ม（トゥム）：夜（19時〜23時）\n'
-                              '・เที่ยงคืน（ティアンクーン）：深夜0時\n\n'
-                              '※日替わりでタイのラッキーカラー（曜日カラー）が日付に反映されます！',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color.fromARGB(255, 250, 248, 248)
-                                    .withValues(alpha: 0.87),
-                                height: 1.6,
-                              ),
+                              'タイ数字のアナログ時計🕐ウィジェット機能があり、お気に入りの写真を背景に設定できます',
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.grey),
                             ),
-                            const SizedBox(height: 24), // 上との余白
-
-                            // ★ここから追加ボタン
-                            ElevatedButton.icon(
-                              onPressed: () {
-                                // 幅380px、高さ700pxの小窓をパッと開く
-                                web.window.open(
-                                  'https://nsquaredtokyo-k.github.io/thaiclock-web/',
-                                  'ThaiClockMini',
-                                  'width=380,height=700,resizable=yes,scrollbars=no',
-                                );
-                              },
-                              icon: const Icon(Icons.open_in_new, size: 18),
-                              label: const Text('📱 デスクトップ用ミニ時計を開く'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF334155),
-                                foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 14),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                            ),
+                            SizedBox(height: 20),
                           ],
                         ),
-                      );
-
-                      if (isWide) {
-                        // 横幅が広い（PC）ときは左右に並べる
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            clockWidget,
-                            const SizedBox(width: 32),
-                            Expanded(child: descriptionWidget),
-                          ],
-                        );
-                      } else {
-                        // 狭い（スマホ）ときは上下に並べる
-                        return Column(
-                          children: [
-                            clockWidget,
-                            const SizedBox(height: 24),
-                            descriptionWidget,
-                          ],
-                        );
-                      }
-                    },
-                  ),
-
-                  const SizedBox(height: 48),
-
-                  // ==========================================================
-                  // 3. 📲 下部：スマホアプリ版のご案内・紹介エリア
-                  // ==========================================================
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(24.0),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF2C2C2E),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: const Column(
-                      children: [
-                        Text(
-                          '📱 スマホアプリ版（iOS / Android）ならもっと便利！',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        Text(
-                          'タイ数字のアナログ時計ウィジェット機能があり、お気に入りの写真を背景に設定できます。',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
-                        SizedBox(height: 20),
-                        // 今後ここにアプリのスクリーンショット画像を並べたりできるよ！
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 48),
-
-                  // ==========================================================
-                  // 4. 🔒 フッター（プライバシーポリシー・著作権表示）
-                  // ==========================================================
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          // 今後プライバシーポリシーなどを出せるよ！
-                        },
-                        child: const Text('Privacy Policy',
-                            style: TextStyle(color: Colors.grey)),
                       ),
-                      const Text(' | ', style: TextStyle(color: Colors.grey)),
-                      TextButton(
-                        onPressed: () {
-                          _launchURL('https://forms.gle/gg1ynzueiQQTfhz8A');
-                        },
-                        child: const Text('Feedback',
-                            style: TextStyle(color: Colors.grey)),
+
+                      const SizedBox(height: 48),
+
+                      // ==========================================================
+                      // 4. 🔒 フッター（プライバシーポリシー・著作権表示）
+                      // ==========================================================
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Privacy Policy',
+                                style: TextStyle(color: Colors.grey)),
+                          ),
+                          const Text(' | ',
+                              style: TextStyle(color: Colors.grey)),
+                          TextButton(
+                            onPressed: () {
+                              _launchURL('https://forms.gle/gg1ynzueiQQTfhz8A');
+                            },
+                            child: const Text('Feedback',
+                                style: TextStyle(color: Colors.grey)),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        '© 2026 thaiclock-web',
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    '© 2026 thaiclock-web',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
