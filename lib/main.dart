@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
 import 'thaiwords.dart';
-//import 'package:flutter/foundation.dart'; // kIsWeb を使うために必要
 import 'package:url_launcher/url_launcher.dart'; // 外部リンクへ繋げる
 import 'package:google_fonts/google_fonts.dart';
 
@@ -417,17 +415,17 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
               // --------------------------------------------------
               // 3. About App リンク（GitHub等へジャンプ）
               // --------------------------------------------------
-              ListTile(
-                leading: const Icon(Icons.info_outline),
-                title: const Text('About App'),
-                trailing: const Icon(Icons.open_in_new, size: 18), // 外部遷移アイコン
-                onTap: () {
-                  Navigator.pop(context);
-                  // ご自身の GitHub ページの URL に書き換えてね！
-                  _launchURL(
-                      'https://nsquaredtokyo-k.github.io/thaiclock-web/');
-                },
-              ),
+              // ListTile(
+              //   leading: const Icon(Icons.info_outline),
+              //   title: const Text('About App'),
+              //   trailing: const Icon(Icons.open_in_new, size: 18), // 外部遷移アイコン
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //     // ご自身の GitHub ページの URL に書き換えてね！
+              //     _launchURL(
+              //         'https://nsquaredtokyo-k.github.io/thaiclock-web/');
+              //   },
+              // ),
 
               const SizedBox(height: 12),
 
@@ -577,6 +575,33 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                                 color: Color.fromARGB(255, 250, 248, 248)
                                     .withValues(alpha: 0.87),
                                 height: 1.6,
+                              ),
+                            ),
+                            const SizedBox(height: 24), // 上との余白
+
+                            // ★ここから追加ボタン
+                            ElevatedButton.icon(
+                              onPressed: () async {
+                                final Uri url = Uri.parse(
+                                    'https://nsquaredtokyo-k.github.io/thaiclock-web/');
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(
+                                    url,
+                                    webOnlyWindowName:
+                                        'ThaiClockMini', // 新しいウィンドウで開く設定
+                                  );
+                                }
+                              },
+                              icon: const Icon(Icons.open_in_new, size: 18),
+                              label: const Text('📱 デスクトップ用ミニ時計を開く'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF334155),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 14),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                               ),
                             ),
                           ],

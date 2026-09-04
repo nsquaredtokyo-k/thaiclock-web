@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # home_widget: ^0.6.0  👈 不要なので削除したよ！
   google_fonts: ^6.1.0
   cupertino_icons: ^1.0.8
   intl: ^0.20.2
