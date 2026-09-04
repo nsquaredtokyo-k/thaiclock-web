@@ -163,7 +163,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
     super.initState();
 
     // 1秒ごとに画面を新しくするタイマー
-// 1秒ごとに画面を更新するタイマー
+
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _now = DateTime.now();
@@ -425,7 +425,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                   Navigator.pop(context);
                   // ご自身の GitHub ページの URL に書き換えてね！
                   _launchURL(
-                      'https://github.com/ku2022kaplya-sketch/thaiclock');
+                      'https://nsquaredtokyo-k.github.io/thaiclock-web/');
                 },
               ),
 
@@ -499,20 +499,48 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                         width: isWide ? 380 : double.infinity,
                         height: 680,
                         decoration: BoxDecoration(
-                          color:
-                              const Color.fromARGB(255, 43, 25, 4), // 従来の時計背景色
-                          borderRadius: BorderRadius.circular(32),
+                          color: const Color(0xFF1E293B), // スマホの外枠（ダークグレー）
+                          borderRadius: BorderRadius.circular(48), // スマホらしい丸み
+                          border: Border.all(
+                            color: const Color(0xFF334155), // スマホの縁フレーム
+                            width: 8,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withValues(alpha: 0.5),
-                              blurRadius: 20,
-                              offset: const Offset(0, 10),
+                              blurRadius: 25,
+                              offset: const Offset(0, 12),
                             ),
                           ],
                         ),
-                        clipBehavior: Clip.hardEdge,
-                        padding: const EdgeInsets.all(20.0),
-                        child: _buildClockContent(context), // 時計の中身を呼び出し
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40), // 液晶画面の角丸
+                          child: Column(
+                            children: [
+                              // スマホ上部のスピーカー（ノッチ風）
+                              Container(
+                                width: 80,
+                                height: 16,
+                                margin:
+                                    const EdgeInsets.only(top: 8, bottom: 4),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withValues(alpha: 0.6),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              // 液晶画面エリア（従来の時計表示）
+                              Expanded(
+                                child: Container(
+                                  color: const Color.fromARGB(
+                                      255, 43, 25, 4), // 従来の時計背景色
+                                  padding: const EdgeInsets.all(20.0),
+                                  child:
+                                      _buildClockContent(context), // 時計の中身を呼び出し
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
 
                       // 👉 右側：簡単な説明テキスト
@@ -629,8 +657,16 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                       ),
                       const Text(' | ', style: TextStyle(color: Colors.grey)),
                       TextButton(
-                        onPressed: () {
-                          // フィードバックフォームなどのURLへ飛ばせるよ！
+                        onPressed: () async {
+                          final url =
+                              Uri.parse('https://forms.gle/gg1ynzueiQQTfhz8A');
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(
+                              url,
+                              mode:
+                                  LaunchMode.externalApplication, // ブラウザアプリ等で開く
+                            );
+                          }
                         },
                         child: const Text('フィードバック',
                             style: TextStyle(color: Colors.grey)),
