@@ -653,7 +653,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                         ),
                         SizedBox(height: 12),
                         Text(
-                          'ホーム画面に設置できるウィジェット機能や、お気に入りの写真を背景に設定できる機能がついています。',
+                          'タイ数字のアナログ時計ウィジェット機能があり、お気に入りの写真を背景に設定できます。',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
@@ -675,7 +675,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                         onPressed: () {
                           // 今後プライバシーポリシーなどを出せるよ！
                         },
-                        child: const Text('プライバシーポリシー',
+                        child: const Text('Privacy Policy',
                             style: TextStyle(color: Colors.grey)),
                       ),
                       const Text(' | ', style: TextStyle(color: Colors.grey)),
@@ -683,7 +683,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                         onPressed: () {
                           _launchURL('https://forms.gle/gg1ynzueiQQTfhz8A');
                         },
-                        child: const Text('フィードバック',
+                        child: const Text('Feedback',
                             style: TextStyle(color: Colors.grey)),
                       ),
                     ],
