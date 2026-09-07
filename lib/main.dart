@@ -663,6 +663,37 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                           ),
                         ),
                         const SizedBox(height: 24),
+// 📸 スクリーンショット3枚並べエリア
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            // 画面幅に合わせて画像の大きさを調整
+                            final isWide = constraints.maxWidth > 600;
+
+                            final screenshots = [
+                              'web/images/screenshot1.png',
+                              'web/images/screenshot2.png',
+                              'web/images/screenshot3.png',
+                            ];
+
+                            return Wrap(
+                              spacing: 16, // 横の間隔
+                              runSpacing: 16, // 縦の間隔（折り返した時）
+                              alignment: WrapAlignment.center,
+                              children: screenshots.map((path) {
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Image.asset(
+                                    path,
+                                    width: isWide ? 220 : 160,
+                                    fit: BoxFit.cover,
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          },
+                        ),
+
+                        const SizedBox(height: 24),
 
                         // ⚠️ Androidウィジェット機能に関する注意事項
                         Container(

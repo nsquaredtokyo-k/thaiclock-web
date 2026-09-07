@@ -28,6 +28,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/app_icon.png
+    - web/images/ # ← これを追加！フォルダ内の画像をまとめて読み込めます  
 
 flutter_icons:
   android: true
