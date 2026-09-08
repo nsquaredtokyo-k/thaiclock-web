@@ -753,8 +753,10 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                                   '当アプリ（Thai Clock）では、ユーザーの氏名、メールアドレス、電話番号などの個人情報を収集・保存・送信することは一切ありません。\n\n'
                                   '2. 写真・画像データへのアクセスについて\n'
                                   '当アプリでは、時計の背景画像を設定する目的でのみ、端末内の写真・ギャラリーへのアクセスを行います。選択された画像データは端末内（ローカル環境）でのみ使用・保存され、外部のサーバー等へ送信されることはありません。\n\n'
-                                  '3. 免責事項\n'
-                                  '当アプリの利用により生じたトラブルや損害等について、開発者は一切の責任を負いかねますのでご了承ください。\n\n'
+                                  '3. 当Webサイトでのアクセス解析について\n'
+                                  '当Webサイトでは、サイトの改善やアクセス状況の把握のため、Google Analyticsを利用しています。Google Analyticsはデータの収集のためにCookieを使用しますが、収集されるデータは匿名であり、個人を特定するものではありません。\n\n'
+                                  '4. 免責事項\n'
+                                  '当アプリおよび当Webサイトの利用により生じたトラブルや損害等について、開発者は一切の責任を負いかねますのでご了承ください。\n\n'
                                   '制定日: 2026年9月1日',
                                   style: TextStyle(
                                       color: Colors.grey,
@@ -787,7 +789,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    '© 2026 thaiclock-web',
+                    '© 2026 nsquared.Tokyo All rights reserved.',
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ],
