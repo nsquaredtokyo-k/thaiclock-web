@@ -23,6 +23,7 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^5.0.0
+  video_player: ^2.8.2  #動画を載せる
 
 flutter:
   uses-material-design: true

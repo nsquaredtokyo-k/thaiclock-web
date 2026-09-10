@@ -4,6 +4,70 @@ import 'thaiwords.dart';
 import 'package:url_launcher/url_launcher.dart'; // 外部リンクへ繋げる
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web/web.dart' as web; // 最新Web標準ライブラリ
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+////===================================
+// 動画を読み込んでループ再生するウィジェット
+class DemoVideoPlayer extends StatefulWidget {
+  final String videoPath;
+  final double width;
+
+  const DemoVideoPlayer({
+    super.key,
+    required this.videoPath,
+    required this.width,
+  });
+
+  @override
+  State<DemoVideoPlayer> createState() => _DemoVideoPlayerState();
+}
+
+class _DemoVideoPlayerState extends State<DemoVideoPlayer> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    // アセットから動画を読み込み
+    _controller = VideoPlayerController.asset(widget.videoPath)
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.setLooping(true); // ループ再生
+        _controller.setVolume(0); // 消音（Webでの自動再生に必須）
+        _controller.play(); // 自動再生スタート
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_controller.value.isInitialized) {
+      // 読み込み中はぐるぐる表示
+      return SizedBox(
+        width: widget.width,
+        height: widget.width * 1.8, // スマホ縦画面っぽいアスペクト比
+        child: const Center(
+          child: CircularProgressIndicator(color: Colors.white54),
+        ),
+      );
+    }
+
+    return SizedBox(
+      width: widget.width,
+      child: AspectRatio(
+        aspectRatio: _controller.value.aspectRatio,
+        child: VideoPlayer(_controller),
+      ),
+    );
+  }
+}
+//////////////////////////動画も追加する件・・・・・・・・・・・・・
 
 void main() {
   runApp(const MyApp());
@@ -453,6 +517,40 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
   }
 
 //=============================================
+// ------------------------------------------------------------
+  // 📲 画像タップ時にモーダル表示＆ピンチズームさせる関数
+  // ------------------------------------------------------------
+  void _showEnlargedImage(BuildContext context, String imagePath) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent, // 背景を透明に
+          insetPadding: const EdgeInsets.all(16),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              // ピンチで拡大縮小＆移動ができるウィジェット
+              InteractiveViewer(
+                minScale: 0.5,
+                maxScale: 4.0,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              // 右上の閉じるボタン
+              IconButton(
+                icon: const Icon(Icons.close, color: Colors.white, size: 30),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
 //==========================表示のところを画面サイズに合わせる============
   @override
   Widget build(BuildContext context) {
@@ -666,8 +764,9 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
 // 📸 スクリーンショット3枚並べエリア
                         LayoutBuilder(
                           builder: (context, constraints) {
-                            // 画面幅に合わせて画像の大きさを調整
+                            // 画面幅に合わせてカードの大きさを調整
                             final isWide = constraints.maxWidth > 600;
+                            final itemWidth = isWide ? 220.0 : 160.0;
 
                             final screenshots = [
                               'web/images/screenshot1.png',
@@ -679,20 +778,41 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                               spacing: 16, // 横の間隔
                               runSpacing: 16, // 縦の間隔（折り返した時）
                               alignment: WrapAlignment.center,
-                              children: screenshots.map((path) {
-                                return ClipRRect(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                // 📸 1〜3枚目：タップで拡大できるスクリーンショット画像
+                                ...screenshots.map((path) {
+                                  return GestureDetector(
+                                    onTap: () =>
+                                        _showEnlargedImage(context, path),
+                                    child: MouseRegion(
+                                      cursor: SystemMouseCursors
+                                          .click, // ホバー時に指マークにする
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: Image.asset(
+                                          path,
+                                          width: itemWidth,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }),
+
+                                // 🎥 4枚目：デモ動画（demo.mp4）
+                                ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
-                                  child: Image.asset(
-                                    path,
-                                    width: isWide ? 220 : 160,
-                                    fit: BoxFit.cover,
+                                  child: DemoVideoPlayer(
+                                    videoPath:
+                                        'assets/demo.mp4', // ※アセットのパスに合わせて調整してね（例: web/images/demo.mp4）
+                                    width: itemWidth,
                                   ),
-                                );
-                              }).toList(),
+                                ),
+                              ],
                             );
                           },
                         ),
-
                         const SizedBox(height: 24),
 
                         // ⚠️ Androidウィジェット機能に関する注意事項
