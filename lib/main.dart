@@ -782,7 +782,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                       children: [
                         const Center(
                           child: Text(
-                            'スマホアプリ版（iOS / Android）ならもっと身近に！',
+                            '【公開準備中（Coming Soon）】スマホアプリ版（iOS / Android）ならもっと身近に！',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
