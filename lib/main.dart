@@ -29,13 +29,16 @@ class _DemoVideoPlayerState extends State<DemoVideoPlayer> {
   @override
   void initState() {
     super.initState();
-    // アセットから動画を読み込み
-    _controller = VideoPlayerController.asset(widget.videoPath)
-      ..initialize().then((_) {
+    // asset(...) ではなく networkUrl(...) で相対パスから読み込む！
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(widget.videoPath),
+    )..initialize().then((_) {
         setState(() {});
         _controller.setLooping(true); // ループ再生
         _controller.setVolume(0); // 消音（Webでの自動再生に必須）
         _controller.play(); // 自動再生スタート
+      }).catchError((error) {
+        debugPrint("動画読み込みエラー: $error");
       });
   }
 
