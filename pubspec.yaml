@@ -15,21 +15,21 @@ dependencies:
   intl: ^0.20.2
   image_picker: ^1.2.3
   path_provider: ^2.1.6
-  web: ^1.0.0  # ←これをつける！
+  web: ^1.0.0
   url_launcher: ^6.3.2
+  video_player: ^2.8.2  # ← dependencies の下に引っ越し！
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^5.0.0
-  video_player: ^2.8.2  #動画を載せる
 
 flutter:
   uses-material-design: true
   assets:
     - assets/app_icon.png
-    - web/images/ # ← これを追加！フォルダ内の画像をまとめて読み込めます  
+    - web/images/  # これで web/images/ 内の demo.mp4 も一緒に読み込まれます！
 
 flutter_icons:
   android: true
