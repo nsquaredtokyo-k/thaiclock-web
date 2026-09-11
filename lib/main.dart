@@ -9,7 +9,6 @@ import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 ////===================================
-// 動画を読み込んでループ再生するウィジェット
 // 動画を読み込んで画面内にある時だけ再生するウィジェット
 class DemoVideoPlayer extends StatefulWidget {
   final String videoPath;
@@ -839,12 +838,23 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                                 }),
 
                                 // 🎥 4枚目：デモ動画（demo.mp4）
+                                // ClipRRect(
+                                //   borderRadius: BorderRadius.circular(16),
+                                //   child: DemoVideoPlayer(
+                                //     videoPath:
+                                //         'images/demo.mp4', // ※アセットのパスに合わせて調整してね（例: web/images/demo.mp4）
+                                //     width: itemWidth,
+                                //   ),
+                                // ),
+
+// // ✅ (動画がsafariで再生できない場合の代替案として、動画の代わりにスクリーンショットを表示する)
+// // 📱 4枚目：ウィジェット画面のスクリーンショット
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
-                                  child: DemoVideoPlayer(
-                                    videoPath:
-                                        'images/demo.mp4', // ※アセットのパスに合わせて調整してね（例: web/images/demo.mp4）
+                                  child: Image.asset(
+                                    'images/screenshot_5.png', // ウィジェット画面の画像パス（適宜調整してください）
                                     width: itemWidth,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ],
