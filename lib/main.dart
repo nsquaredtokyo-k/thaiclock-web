@@ -809,6 +809,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                               'web/images/screenshot1.png',
                               'web/images/screenshot2.png',
                               'web/images/screenshot3.png',
+                              'web/images/screenshot4.png',
                             ];
 
                             return Wrap(
@@ -846,17 +847,6 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                                 //     width: itemWidth,
                                 //   ),
                                 // ),
-
-// // ✅ (動画がsafariで再生できない場合の代替案として、動画の代わりにスクリーンショットを表示する)
-// // 📱 4枚目：ウィジェット画面のスクリーンショット
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  child: Image.asset(
-                                    'images/screenshot4.png', // ウィジェット画面の画像パス（適宜調整してください）
-                                    width: itemWidth,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
                               ],
                             );
                           },
