@@ -6,9 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:web/web.dart' as web; // 最新Web標準ライブラリ
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 ////===================================
 // 動画を読み込んでループ再生するウィジェット
+// 動画を読み込んで画面内にある時だけ再生するウィジェット
 class DemoVideoPlayer extends StatefulWidget {
   final String videoPath;
   final double width;
@@ -25,47 +27,80 @@ class DemoVideoPlayer extends StatefulWidget {
 
 class _DemoVideoPlayerState extends State<DemoVideoPlayer> {
   late VideoPlayerController _controller;
+  late final AppLifecycleListener _lifecycleListener;
+  bool _isVisible = false; // 画面内に見えているかのフラグ
 
   @override
   void initState() {
     super.initState();
-    // asset(...) ではなく networkUrl(...) で相対パスから読み込む！
+
+    // 動画コントローラーの初期化
     _controller = VideoPlayerController.networkUrl(
       Uri.parse(widget.videoPath),
     )..initialize().then((_) {
-        setState(() {});
-        _controller.setLooping(true); // ループ再生
-        _controller.setVolume(0); // 消音（Webでの自動再生に必須）
-        _controller.play(); // 自動再生スタート
+        if (mounted) {
+          setState(() {});
+          _controller.setLooping(true); // ループ再生
+          _controller.setVolume(0); // 消音（Webでの自動再生に必須）
+        }
       }).catchError((error) {
         debugPrint("動画読み込みエラー: $error");
       });
+
+    // 別タブ移動やブラウザ最小化などのライフサイクル検知
+    _lifecycleListener = AppLifecycleListener(
+      onPause: () {
+        // バックグラウンド（別タブなど）に移動したら一時停止
+        _controller.pause();
+      },
+      onResume: () {
+        // タブに戻ってきた時、画面内に映っていれば再生再開
+        if (_isVisible) {
+          _controller.play();
+        }
+      },
+    );
   }
 
   @override
   void dispose() {
+    _lifecycleListener.dispose();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // 読み込み完了前の表示
     if (!_controller.value.isInitialized) {
-      // 読み込み中はぐるぐる表示
       return SizedBox(
         width: widget.width,
-        height: widget.width * 1.8, // スマホ縦画面っぽいアスペクト比
+        height: widget.width * (16 / 9),
         child: const Center(
-          child: CircularProgressIndicator(color: Colors.white54),
+          child: CircularProgressIndicator(),
         ),
       );
     }
 
-    return SizedBox(
-      width: widget.width,
-      child: AspectRatio(
-        aspectRatio: _controller.value.aspectRatio,
-        child: VideoPlayer(_controller),
+    // 画面内にあるかどうかを監視するウィジェット
+    return VisibilityDetector(
+      key: Key('demo-video-${widget.videoPath}'),
+      onVisibilityChanged: (visibilityInfo) {
+        // 50%以上画面に表示されていたら「見えている」と判定
+        _isVisible = visibilityInfo.visibleFraction > 0.5;
+
+        if (_isVisible) {
+          _controller.play(); // 画面内に見えたら再生
+        } else {
+          _controller.pause(); // 画面外に隠れたら一時停止
+        }
+      },
+      child: SizedBox(
+        width: widget.width,
+        child: AspectRatio(
+          aspectRatio: _controller.value.aspectRatio,
+          child: VideoPlayer(_controller),
+        ),
       ),
     );
   }
