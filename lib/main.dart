@@ -852,7 +852,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
                                   child: Image.asset(
-                                    'images/screenshot_5.png', // ウィジェット画面の画像パス（適宜調整してください）
+                                    'images/screenshot4.png', // ウィジェット画面の画像パス（適宜調整してください）
                                     width: itemWidth,
                                     fit: BoxFit.contain,
                                   ),
