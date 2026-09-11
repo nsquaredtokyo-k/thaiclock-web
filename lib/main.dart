@@ -808,7 +808,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                                   borderRadius: BorderRadius.circular(16),
                                   child: DemoVideoPlayer(
                                     videoPath:
-                                        'assets/demo.mp4', // ※アセットのパスに合わせて調整してね（例: web/images/demo.mp4）
+                                        'images/demo.mp4', // ※アセットのパスに合わせて調整してね（例: web/images/demo.mp4）
                                     width: itemWidth,
                                   ),
                                 ),
