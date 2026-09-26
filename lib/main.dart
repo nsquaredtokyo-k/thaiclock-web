@@ -874,7 +874,25 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                           },
                         ),
                         const SizedBox(height: 24),
-
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              web.window.open(
+                                'https://apps.apple.com/app/id6811279433',
+                                '_blank',
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: SvgPicture.asset(
+                                'assets/app_store_badge_JP.svg', // ★日本語版のファイル名！
+                                height: 44,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                        ),
                         // ⚠️ Androidウィジェット機能に関する注意事項
                         Container(
                           padding: const EdgeInsets.all(16.0),

@@ -33,6 +33,7 @@ flutter:
     - assets/app_icon.png
     - web/images/  # これで web/images/ 内の demo.mp4 も一緒に読み込まれます！
     - assets/app_store_badge.svg
+    - assets/app_store_badge_JP.svg # ★ここを追加！
     
 flutter_icons:
   android: true
