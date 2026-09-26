@@ -687,6 +687,32 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
+
+
+// ★ 1箇所目：App Store バナー
+MouseRegion(
+  cursor: SystemMouseCursors.click,
+  child: GestureDetector(
+    onTap: () {
+      // App Storeのリンクを開く
+      web.window.open(
+        'https://apps.apple.com/app/id6811279433',
+        '_blank',
+      );
+    },
+    child: Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Image.network(
+        'https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83',
+        height: 44,
+        fit: BoxFit.contain,
+      ),
+    ),
+  ),
+),
+
+
                             Text(
                               '💡 タイ語の時刻表現について',
                               style: TextStyle(
