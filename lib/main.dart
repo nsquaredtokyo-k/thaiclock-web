@@ -4,9 +4,9 @@ import 'thaiwords.dart';
 import 'package:url_launcher/url_launcher.dart'; // 外部リンクへ繋げる
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web/web.dart' as web; // 最新Web標準ライブラリ
-import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 ////===================================
 // 動画を読み込んで画面内にある時だけ再生するウィジェット
@@ -687,32 +687,28 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
-
-
 // ★ 1箇所目：App Store バナー
-MouseRegion(
-  cursor: SystemMouseCursors.click,
-  child: GestureDetector(
-    onTap: () {
-      // App Storeのリンクを開く
-      web.window.open(
-        'https://apps.apple.com/app/id6811279433',
-        '_blank',
-      );
-    },
-    child: Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Image.network(
-        'https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83',
-        height: 44,
-        fit: BoxFit.contain,
-      ),
-    ),
-  ),
-),
+                            MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: GestureDetector(
+                                onTap: () {
+                                  web.window.open(
+                                    'https://apps.apple.com/app/id6811279433',
+                                    '_blank',
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: SvgPicture.asset(
+                                    'assets/app_store_badge.svg', // ★SvgPictureを使うよ！
+                                    height: 44,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                            ),
 
-
+//=============================アイコンはこの上まで=======
                             Text(
                               '💡 タイ語の時刻表現について',
                               style: TextStyle(
@@ -807,7 +803,7 @@ MouseRegion(
                       children: [
                         const Center(
                           child: Text(
-                            '【公開準備中（Coming Soon）】スマホアプリ版（iOS / Android）ならもっと身近に！',
+                            '【スマホアプリ版（iOS / Android(準備中)）ならもっと身近に！',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
