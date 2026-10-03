@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プライバシーポリシー - Thai Clock App</title>
-    <!-- ファビコン設定（webフォルダ内のfavicon.pngを読み込む） -->
+    <title>プライバシーポリシー / Privacy Policy / 개인정보처리방침 - Thai Clock App</title>
+    <!-- ファビコン設定 -->
     <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
@@ -23,33 +26,105 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        /* 言語切り替えナビゲーション */
+        .lang-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .lang-nav a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .lang-nav a:hover {
+            text-decoration: underline;
+        }
         .app-title { font-size: 14px; color: #666; font-weight: bold; margin-bottom: 4px; }
         h1 { font-size: 24px; color: #111; margin-top: 0; margin-bottom: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         h2 { font-size: 18px; color: #222; margin-top: 24px; margin-bottom: 8px; }
         p { margin: 0 0 12px 0; color: #555; font-size: 14px; }
-        .footer-info { margin-top: 30px; padding-top: 12px; border-top: 1px solid #eee; color: #888; font-size: 12px; }
+        
+        /* セクション区切り線 */
+        .lang-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed #ddd;
+        }
+        .footer-info { margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; color: #888; font-size: 12px; }
         .copyright { margin-top: 6px; font-weight: 500; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="app-title">タイ語時計アプリ</div>
-        <h1>Thai Clock プライバシーポリシー</h1>
         
-        <h2>1. 個人情報の収集について</h2>
-        <p>当アプリ（Thai Clock）では、ユーザーの氏名、メールアドレス、電話番号などの個人情報を収集・保存・送信することは一切ありません。</p>
-        
-        <h2>2. 写真・画像データへのアクセスについて</h2>
-        <p>当アプリでは、時計の背景画像を設定する目的でのみ、端末内の写真・ギャラリーへのアクセスを行います。選択された画像データは端末内（ローカル環境）でのみ使用・保存され、外部のサーバー等へ送信されることはありません。</p>
-        
-        <h2>3. 当Webサイトでのアクセス解析について</h2>
-        <p>当Webサイトでは、サイトの改善やアクセス状況の把握のため、Google Analyticsを利用しています。Google Analyticsはデータの収集のためにCookieを使用しますが、収集されるデータは匿名であり、個人を特定するものではありません。</p>
-        
-        <h2>4. 免責事項</h2>
-        <p>当アプリおよび当Webサイトの利用により生じたトラブルや損害等について、開発者は一切の責任を負いかねますのでご了承ください。</p>
+        <!-- 言語ナビゲーション -->
+        <div class="lang-nav">
+            <span>Language:</span>
+            <a href="#ja">日本語</a> | 
+            <a href="#ko">한국어</a> | 
+            <a href="#en">English</a>
+        </div>
+
+        <!-- 日本語版 -->
+        <section id="ja">
+            <div class="app-title">タイ語時計アプリ</div>
+            <h1>Thai Clock プライバシーポリシー</h1>
+            
+            <h2>1. 個人情報の収集について</h2>
+            <p>当アプリ（Thai Clock）では、ユーザーの氏名、メールアドレス、電話番号などの個人情報を収集・保存・送信することは一切ありません。</p>
+            
+            <h2>2. 写真・画像データへのアクセスについて</h2>
+            <p>当アプリでは、時計の背景画像を設定する目的でのみ、端末内の写真・ギャラリーへのアクセスを行います。選択された画像データは端末内（ローカル環境）でのみ使用・保存され、外部のサーバー等へ送信されることはありません。</p>
+            
+            <h2>3. 当Webサイトでのアクセス解析について</h2>
+            <p>当Webサイトでは、サイトの改善やアクセス状況の把握のため、Google Analyticsを利用しています。Google Analyticsはデータの収集のためにCookieを使用しますが、収集されるデータは匿名であり、個人を特定するものではありません。</p>
+            
+            <h2>4. 免責事項</h2>
+            <p>当アプリおよび当Webサイトの利用により生じたトラブルや損害等について、開発者は一切の責任を負いかねますのでご了承ください。</p>
+        </section>
+
+        <!-- 韓国語版 -->
+        <section id="ko" class="lang-section">
+            <div class="app-title">태국어 시계 앱</div>
+            <h1>Thai Clock 개인정보처리방침</h1>
+            
+            <h2>1. 개인정보 수집에 대하여</h2>
+            <p>본 앱(Thai Clock)은 사용자의 성명, 이메일 주소, 전화번호 등의 개인정보를 수집·저장·전송하지 않습니다.</p>
+            
+            <h2>2. 사진 및 이미지 데이터 접근 권한에 대하여</h2>
+            <p>본 앱은 시계의 배경 이미지를 설정할 목적에 한하여 기기 내 사진 및 갤러리에 접근합니다. 선택된 이미지 데이터는 기기 내(로컬 환경)에서만 사용 및 저장되며, 외부 서버 등으로 전송되지 않습니다.</p>
+            
+            <h2>3. 본 웹사이트의 접근 분석에 대하여</h2>
+            <p>본 웹사이트에서는 사이트 개선 및 이용 현황 파악을 위해 Google Analytics를 이용하고 있습니다. Google Analytics는 데이터 수집을 위해 Cookie를 사용하지만, 수집되는 데이터는 익명이며 개인을 식별하지 않습니다.</p>
+            
+            <h2>4. 면책사항</h2>
+            <p>본 앱 및 본 웹사이트 이용으로 인해 발생한 문제나 손해 등에 대해 개발자는 어떠한 책임도 지지 않으므로 양해 부탁드립니다.</p>
+        </section>
+
+        <!-- 英語版 -->
+        <section id="en" class="lang-section">
+            <div class="app-title">Thai Clock App</div>
+            <h1>Thai Clock Privacy Policy</h1>
+            
+            <h2>1. Collection of Personal Information</h2>
+            <p>This app (Thai Clock) does not collect, store, or transmit any personal information, such as your name, email address, or phone number.</p>
+            
+            <h2>2. Access to Photo and Image Data</h2>
+            <p>This app accesses the photos and gallery on your device solely for the purpose of setting a background image for the clock. Selected image data is stored and used only within your device (local environment) and is never transmitted to external servers.</p>
+            
+            <h2>3. Website Analytics</h2>
+            <p>This website uses Google Analytics to improve the site and understand usage status. Google Analytics uses cookies to collect data, but all collected data is anonymous and does not identify individuals.</p>
+            
+            <h2>4. Disclaimer</h2>
+            <p>The developer assumes no responsibility for any trouble, loss, or damage caused by the use of this app or this website.</p>
+        </section>
         
         <div class="footer-info">
-            <p style="margin:0;">制定日: 2026年9月1日</p>
+            <p style="margin:0;">制定日 / Effective Date: 2026年9月1日</p>
             <p class="copyright" style="margin:4px 0 0 0;">© 2026 Thai Clock. All rights reserved.</p>
         </div>
     </div>

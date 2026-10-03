@@ -605,7 +605,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                   // 1. 🔝 ヘッダー（WEBサイトのタイトル）
                   // ==========================================================
                   const Text(
-                    '🇹🇭 Thai Clock (タイ語時計) - Web版',
+                    '🇹🇭 Thai Clock (タイ語時計) - Web',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 28,
@@ -618,6 +618,12 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                     'タイ語独特の時間の読み方をリアルタイムで楽しめる時計アプリ',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'Enjoy learning unique Thai time expressions in real-time.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12, color: Colors.white70),
                   ),
                   const SizedBox(height: 32),
 
@@ -710,7 +716,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
 
 //=============================アイコンはこの上まで=======
                             Text(
-                              '💡 タイ語の時刻表現について',
+                              '💡 タイ語の時刻表現について / Thai Time System',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -719,15 +725,17 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                             ),
                             SizedBox(height: 16),
                             Text(
-                              'タイ語の時間の言い方は、朝・昼・夕方・夜で使う単語がガラリと変わるユニークな仕組みになっています。\n\n'
-                              '・ตี（ティー）：朝方（1時〜5時）\n'
-                              '・โมงเช้า（モーンチャオ）：午前中（6時〜11時）\n'
-                              '・เที่ยง（ティアン）：正午（12時）\n'
-                              '・บ่าย（バーイ）：午後（13時〜15時）\n'
-                              '・โมงเย็น（モーンイエン）：夕方（16時〜18時）\n'
-                              '・ทุ่ม（トゥム）：夜（19時〜23時）\n'
-                              '・เที่ยงคืน（ティアンクーン）：深夜0時\n\n'
-                              '※日替わりでタイのラッキーカラー（曜日カラー）が日付に反映されます！',
+                              'タイ語の時間の言い方は、朝・昼・夕方・夜で使う単語がガラリと変わるユニークな仕組みになっています。\n'
+                              'Thai time telling uses dynamic phrasing that changes depending on the period of the day.\n\n'
+                              '・ตี（ティー）：朝方（1時〜5時） / Early Morning (1am-5am)\n'
+                              '・โมงเช้า（モーンチャオ）：午前中（6時〜11時） / Morning (6am-11am)\n'
+                              '・เที่ยง（ティアン）：正午（12時） / Noon (12pm)\n'
+                              '・บ่าย（バーイ）：午後（13時〜15時） / Afternoon (1pm-3pm)\n'
+                              '・โมงเย็น（モーンイエン）：夕方（16時〜18時） / Late Afternoon (4pm-6pm)\n'
+                              '・ทุ่ม（トゥム）：夜（19時〜23時） / Night (7pm-11pm)\n'
+                              '・เที่ยงคืน（ティアンクーン）：深夜0時 / Midnight (12am)\n\n'
+                              '※日替わりでタイのラッキーカラー（曜日カラー）が日付に反映されます！\n'
+                              '※ The date color changes daily based on traditional Thai lucky colors!',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Color.fromARGB(255, 250, 248, 248)
@@ -748,7 +756,8 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                                 );
                               },
                               icon: const Icon(Icons.open_in_new, size: 18),
-                              label: const Text(' デスクトップ用ミニ時計を開く'),
+                              label: const Text(
+                                  ' デスクトップ用ミニ時計を開く(open in new window)'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF334155),
                                 foregroundColor: Colors.white,
@@ -803,11 +812,22 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                       children: [
                         const Center(
                           child: Text(
-                            '【スマホアプリ版（iOS / Android(準備中)）ならもっと身近に！',
+                            '【スマホアプリ版（iOS / Android(準備中)）ならもっと身近に！】',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        const Center(
+                          child: Text(
+                            '【 Mobile App (iOS / Android Coming Soon) 】',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white70,
                             ),
                           ),
                         ),
@@ -817,6 +837,15 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                             'タイ数字のアナログ時計🕐ウィジェット機能があり、お気に入りの写真を背景に設定できます',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        const Center(
+                          child: Text(
+                            'Features Thai numeral clock widgets and customizable photo backgrounds.',
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.white70),
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -893,6 +922,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                             ),
                           ),
                         ),
+
                         // ⚠️ Androidウィジェット機能に関する注意事項
                         Container(
                           padding: const EdgeInsets.all(16.0),
@@ -904,7 +934,8 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '⚠️ ウィジェット機能に関するご注意（Android版）',
+                                '⚠️ ウィジェット機能に関するご注意（Android版）\n'
+                                '   Widget Feature Note (Android)',
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.bold,
@@ -915,7 +946,10 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                               Text(
                                 'Androidのホーム画面ウィジェット機能は、スマホのバッテリー消費を抑えるシステム仕様（省電力制御）のため、毎分00秒のタイミングで画面更新が行われる仕様となっております。\n'
                                 '写真を変更した際、ホーム画面のウィジェットに反映されるまで最大で約1分程度のタイムラグが生じる場合がありますが、アプリおよびシステムの正常な動作によるものです。\n'
-                                '※現在、Web版ではホーム画面ウィジェット機能はご利用いただけません。',
+                                '※現在、Web版ではホーム画面ウィジェット機能はご利用いただけません。\n\n'
+                                'Due to system power-saving controls on Android, home screen widgets update every minute at 00 seconds. '
+                                'When updating background photos, it may take up to 1 minute for changes to reflect on the widget. This is normal system behavior.\n'
+                                '※ Home screen widget features are currently not available in the Web version.',
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: Colors.grey,
@@ -943,19 +977,27 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                             context: context,
                             builder: (context) => AlertDialog(
                               backgroundColor: const Color(0xFF2C2C2E),
-                              title: const Text('プライバシーポリシー',
+                              title: const Text('プライバシーポリシー / Privacy Policy',
                                   style: TextStyle(color: Colors.white)),
                               content: const SingleChildScrollView(
                                 child: Text(
                                   '1. 個人情報の収集について\n'
-                                  '当アプリ（Thai Clock）では、ユーザーの氏名、メールアドレス、電話番号などの個人情報を収集・保存・送信することは一切ありません。\n\n'
+                                  '当アプリ（Thai Clock）では、ユーザーの氏名、メールアドレス、電話番号などの個人情報を収集・保存・送信することは一切ありません。\n'
+                                  '1. Collection of Personal Information\n'
+                                  'Thai Clock does not collect, store, or transmit any personal information such as your name, email address, or phone number.\n\n'
                                   '2. 写真・画像データへのアクセスについて\n'
-                                  '当アプリでは、時計の背景画像を設定する目的でのみ、端末内の写真・ギャラリーへのアクセスを行います。選択された画像データは端末内（ローカル環境）でのみ使用・保存され、外部のサーバー等へ送信されることはありません。\n\n'
+                                  '当アプリでは、時計の背景画像を設定する目的でのみ、端末内の写真・ギャラリーへのアクセスを行います。選択された画像データは端末内（ローカル環境）でのみ使用・保存され、外部のサーバー等へ送信されることはありません。\n'
+                                  '2. Access to Photos and Images\n'
+                                  'This app accesses your photo library solely for setting clock background images. Selected images are processed and stored locally on your device and are never transmitted to external servers.\n\n'
                                   '3. 当Webサイトでのアクセス解析について\n'
-                                  '当Webサイトでは、サイトの改善やアクセス状況の把握のため、Google Analyticsを利用しています。Google Analyticsはデータの収集のためにCookieを使用しますが、収集されるデータは匿名であり、個人を特定するものではありません。\n\n'
+                                  '当Webサイトでは、サイトの改善やアクセス状況の把握のため、Google Analyticsを利用しています。Google Analyticsはデータの収集のためにCookieを使用しますが、収集されるデータは匿名であり、個人を特定するものではありません。\n'
+                                  '3. Analytics on this Website\n'
+                                  'This website uses Google Analytics to analyze traffic and improve user experience. Google Analytics uses cookies to collect anonymous data, which cannot identify individual users.\n\n'
                                   '4. 免責事項\n'
-                                  '当アプリおよび当Webサイトの利用により生じたトラブルや損害等について、開発者は一切の責任を負いかねますのでご了承ください。\n\n'
-                                  '制定日: 2026年9月1日',
+                                  '当アプリおよび当Webサイトの利用により生じたトラブルや損害等について、開発者は一切の責任を負いかねますのでご了承ください。\n'
+                                  '4. Disclaimer\n'
+                                  'The developer assumes no responsibility or liability for any damages or issues arising from the use of this app or website.\n\n'
+                                  '制定日 / Established: 2026年9月1日 (Sep 1, 2026)',
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 13,
@@ -965,7 +1007,7 @@ class _ThaiClockHomeScreenState extends State<ThaiClockHomeScreen> {
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
-                                  child: const Text('閉じる',
+                                  child: const Text('閉じる / Close',
                                       style: TextStyle(color: Colors.white)),
                                 ),
                               ],
